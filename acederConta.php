@@ -8,6 +8,7 @@
       include_once 'webservices/config/database.php';
       //iniciar classe products
       include_once 'webservices/objects/utilizador.php';
+      echo "teste"
     ?>
 
     <meta charset="utf-8">
