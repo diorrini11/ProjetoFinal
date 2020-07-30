@@ -31,24 +31,24 @@
       $database=new Database();
       $db=$database->getConnection();
       //inicializar objeto
-      $pergunta =new Pergunta($db);
+      $pergunta = new Pergunta($db);
+
       //query products
       $stmt=$pergunta->read();
       $num=$stmt->rowCount();
+
       //verificar se existem produtos na BD
       if($num > 0)
       {
           //colocar os produtos num vector
           $pergunta_arr=array();
-          $pergunta_arr["records"]=array();
           //percorrer a lista de valores e coloca-los no vetor
           while ($row=$stmt->fetch(PDO::FETCH_ASSOC))
           {
             //extrair linha
             extract($row);
-            $pergunta_item=array(
-            "pergunta" => $pergunta);
-            array_push($pergunta_arr["records"], $pergunta_item);
+            $pergunta_item= $pergunta;
+            array_push($pergunta_arr, $pergunta_item);
           }
       }
     ?>
@@ -58,11 +58,12 @@
       <div class="container">
         <label>Selecione a pergunta a remover:</label>
         <br>
+        <label for="pergunta">Escolha uma pergunta:</label>
         <select name="pergunta" id="pergunta">
-          <?php 
-            foreach ($pergunta_arr as $pergunta => $value)
+        <?php
+            foreach ($pergunta_arr as &$value)
             {
-              echo "<option value=".$pergunta.">".$pergunta."</option>";
+              echo "<option >".$value."</option>";
             }
           ?>
         </select>

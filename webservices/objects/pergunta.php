@@ -24,8 +24,8 @@ class Pergunta
     public function read()
     {
         //criar query
-        $query="Select pergunta FROM ".$this->table_name.";";
-        $stmt=$this->conn->prepare($query);
+        $query="SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
         $stmt->execute();
         //devolver todos os valores registados na BD
         return $stmt;
